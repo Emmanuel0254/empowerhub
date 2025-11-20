@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Posting Page</title>
+  <link rel="icon" href="images/logo-favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: whitesmoke;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main{
+      flex: 1;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-top: 16%;
+    }
+
+    .job-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .job-post {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .add-post-section {
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: right;
+    }
+
+    .add-post-btn {
+      padding: 10px 20px;
+      background-color: #facc15;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .post-form {
+      display: none;
+      background-color: white;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .post-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .post-form input,
+    .post-form textarea,
+    .post-form select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-buttons {
+      text-align: right;
+    }
+
+    .form-buttons button {
+      padding: 8px 16px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .form-buttons .post-btn {
+      background-color: #1e3a8a;
+      color: white;
+    }
+
+    .form-buttons .cancel-btn {
+      background-color: #facc15;
+      color: white;
+    }
+
+    .company-only {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+
+    <div class="logo">
+      <span style="color: #facc15;">Empower</span>
+      <span style="color: #1e3a8a;">Hub</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#blog">Blog</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">Services</button>
+        <div class="dropdown-content">
+          <a href="forum.html">Forum</a>
+          <a href="job-posting.html">Job Posting</a>
+          <a href="profile.html">Profile</a>
+          <a href="javascript:void(0)" onclick="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-buttons"></div>
+  </header>
+
+  <script>
+    // Navbar and Burger Menu Toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const burger = document.querySelector('.burger');
+      const nav = document.querySelector('.nav-links');
+      const navLinks = document.querySelectorAll('.nav-links a, .nav-links .dropdown');
+
+      burger.addEventListener('click', () => {
+        nav.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+
+        navLinks.forEach((link, index) => {
+          link.style.animation = link.style.animation ? '' :
+            `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+        });
+      });
+
+      const servicesBtn = document.querySelector('.dropbtn');
+      const dropdown = document.querySelector('.dropdown-content');
+
+      servicesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+
+      window.addEventListener('click', function (event) {
+        if (!event.target.matches('.dropbtn')) {
+          dropdown.classList.remove('show');
+        }
+      });
+    });
+
+    function logout() {
+      alert('Logging out...');
+    }
+  </script>
+
+<main>
+  <h1>Job Board</h1>
+
+  <div class="job-container" id="jobContainer">
+    <div class="job-post">
+      <strong>Software Developer</strong><br>
+      ABC Tech Ltd. is hiring a full-stack developer with React and Node.js experience.
+    </div>
+    <div class="job-post">
+      <strong>Graphic Designer</strong><br>
+      Freelance opportunity for a creative designer. Remote work.
+    </div>
+    <div class="job-post">
+      <strong>Sales Agent</strong><br>
+      XYZ Distributors is looking for an enthusiastic sales representative in Nairobi.
+    </div>
+  </div>
+
+  <div class="add-post-section">
+    <button class="add-post-btn" onclick="toggleForm()">Add Post</button>
+
+    <div class="post-form" id="postForm">
+      <label for="postType">Post Type</label>
+      <select id="postType" onchange="toggleCompanyField()">
+        <option value="Job Vacancy">Job Vacancy</option>
+        <option value="Job Request">Job Request</option>
+      </select>
+
+      <label for="jobTitle">Job Title</label>
+      <input type="text" id="jobTitle" placeholder="Enter job title" />
+
+      <div id="companyField" class="company-only">
+        <label for="companyName">Company Name</label>
+        <input type="text" id="companyName" placeholder="Enter company name" />
+      </div>
+
+      <label for="location">Location</label>
+      <input type="text" id="location" placeholder="Enter job location" />
+
+      <label for="contact">Contact / Email</label>
+      <input type="text" id="contact" placeholder="Enter contact or email" />
+
+      <label for="jobDetails">Details</label>
+      <textarea id="jobDetails" rows="4" placeholder="Enter job description..."></textarea>
+
+      <div class="form-buttons">
+        <button class="cancel-btn" onclick="cancelPost()">Cancel</button>
+        <button class="post-btn" onclick="submitPost()">Post</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Upskilling & Awareness. All Rights Reserved.</p>
+</footer> 
+
+
+  <script>
+    function toggleForm() {
+      const form = document.getElementById('postForm');
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleCompanyField() {
+      const type = document.getElementById('postType').value;
+      const field = document.getElementById('companyField');
+      field.style.display = type === 'Job Vacancy' ? 'block' : 'none';
+    }
+
+    function clearForm() {
+      document.getElementById('postType').value = "Job Vacancy";
+      document.getElementById('jobTitle').value = "";
+      document.getElementById('companyName').value = "";
+      document.getElementById('location').value = "";
+      document.getElementById('contact').value = "";
+      document.getElementById('jobDetails').value = "";
+      toggleCompanyField();
+    }
+
+    function cancelPost() {
+      document.getElementById('postForm').style.display = 'none';
+      clearForm();
+    }
+
+    function submitPost() {
+      const type = document.getElementById('postType').value;
+      const title = document.getElementById('jobTitle').value.trim();
+      const company = document.getElementById('companyName').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const details = document.getElementById('jobDetails').value.trim();
+      const jobContainer = document.getElementById('jobContainer');
+
+      if (!title || !location || !contact || !details) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const newPost = document.createElement('div');
+      newPost.className = 'job-post';
+
+      const titleElem = document.createElement('strong');
+      titleElem.textContent = `${title} (${type})`;
+
+      const locationElem = document.createElement('div');
+      locationElem.innerHTML = `<em>Location:</em> ${location}`;
+
+      const contactElem = document.createElement('div');
+      contactElem.innerHTML = `<em>Contact:</em> ${contact}`;
+
+      const detailsElem = document.createElement('div');
+      detailsElem.textContent = details;
+
+      newPost.appendChild(titleElem);
+
+      if (type === 'Job Vacancy') {
+        const companyElem = document.createElement('div');
+        companyElem.innerHTML = `<em>Company:</em> ${company || 'N/A'}`;
+        newPost.appendChild(companyElem);
+      }
+
+      newPost.appendChild(locationElem);
+      newPost.appendChild(contactElem);
+      newPost.appendChild(detailsElem);
+
+      jobContainer.prepend(newPost);
+      cancelPost();
+      newPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Initialize
+    toggleCompanyField();
+  </script>
+</body>
+</html>

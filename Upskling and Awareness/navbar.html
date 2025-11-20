@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>EmpowerHub Navbar</title>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+
+    <div class="logo">
+      <span style="color: #facc15;">Empower</span>
+      <span style="color: #1e3a8a;">Hub</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#blog">Blog</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">Services</button>
+        <div class="dropdown-content">
+          <a href="forum.html">Forum</a>
+          <a href="job-posting.html">Job Posting</a>
+          <a href="profile.html">Profile</a>
+          <a href="javascript:void(0)" onclick="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-buttons">
+      <button id="loginBtn">Login</button>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h3>Login</h3>
+      <input type="text" id="emailOrUsername" placeholder="Email or Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
+
+  <script>
+    // Navbar and Burger Menu Toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const burger = document.querySelector('.burger');
+      const nav = document.querySelector('.nav-links');
+      const navLinks = document.querySelectorAll('.nav-links a, .nav-links .dropdown');
+
+      burger.addEventListener('click', () => {
+        nav.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+
+        navLinks.forEach((link, index) => {
+          link.style.animation = link.style.animation ? '' :
+            `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+        });
+      });
+
+      const servicesBtn = document.querySelector('.dropbtn');
+      const dropdown = document.querySelector('.dropdown-content');
+
+      servicesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+
+      window.addEventListener('click', function (event) {
+        if (!event.target.matches('.dropbtn')) {
+          dropdown.classList.remove('show');
+        }
+      });
+    });
+
+    // Modal for Login
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+
+    loginBtn.addEventListener('click', () => {
+      loginModal.style.display = 'flex';
+    });
+
+    // Close Modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === loginModal) {
+        loginModal.style.display = 'none';
+      }
+    });
+
+    // Login function (just a placeholder)
+    function login() {
+      const emailOrUsername = document.getElementById('emailOrUsername').value;
+      const password = document.getElementById('password').value;
+
+      if (emailOrUsername && password) {
+        alert(`Logged in as ${emailOrUsername}`);
+        loginModal.style.display = 'none';
+      } else {
+        alert('Please fill in both fields');
+      }
+    }
+
+    function logout() {
+      alert('Logging out...');
+    }
+  </script>
+
+

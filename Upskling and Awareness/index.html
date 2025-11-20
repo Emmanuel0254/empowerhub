@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="images/logo-favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <title>EmpowerHub</title>
+</head>
+<body>
+
+   <!-- Navbar -->
+   <header class="navbar">
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+
+    <div class="logo">
+      <span style="color: #facc15;">Empower</span><span style="color:#1e3a8a";>Hub</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#blog">Blog</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">Services</button>
+        <div class="dropdown-content">
+          <a href="forum.html">Forum</a>
+          <a href="job-posting.html">Job Posting</a>
+          <a href="profile.html">Profile</a>
+          <a href="javascript:void(0)" onclick="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-buttons">
+      <button id="loginBtn">Login</button>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeLoginModal()">&times;</span>
+      <h3>Login</h3>
+      <input type="text" id="emailOrUsername" placeholder="Email or Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <span class="close" onclick="closeLoginModal()">&times</span>
+      <button id="loginBtn" onclick="openLoginModal()">Login</button>
+
+      <p style="text-align: center; margin-top: 10px;">
+      <a href="#" class="forgot-pasword"  onclick="openForgotPasswordModal()">Forgot Password?</a>
+    </p>
+
+      <!-- Forgot Password Modal -->
+ <div id="forgotPasswordModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeForgotPasswordModal()">&times;</span>
+    <h3>Reset Your Password</h3>
+    <p>Enter your email address and we’ll send you a link to reset your password.</p>
+    <input type="email" id="resetEmail" placeholder="Enter your email" required />
+    <button class="button" onclick="sendResetLink()">Send Reset Link</button>
+
+    <p style="text-align:center; margin-top: 10px;">
+      <a href="#" onclick="backToLogin()">Back to Login</a>
+    </p>
+    </div>
+   </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Navbar and Burger Menu Toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const burger = document.querySelector('.burger');
+      const nav = document.querySelector('.nav-links');
+      const navLinks = document.querySelectorAll('.nav-links a, .nav-links .dropdown');
+
+      burger.addEventListener('click', () => {
+        nav.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+
+        navLinks.forEach((link, index) => {
+          link.style.animation = link.style.animation ? '' :
+            `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+        });
+      });
+
+      const servicesBtn = document.querySelector('.dropbtn');
+      const dropdown = document.querySelector('.dropdown-content');
+
+      servicesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+
+      window.addEventListener('click', function (event) {
+        if (!event.target.matches('.dropbtn')) {
+          dropdown.classList.remove('show');
+        }
+      });
+    });
+
+    // Modal for Login
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+
+    loginBtn.addEventListener('click', () => {
+      loginModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Close Modal when clicking outside
+    function closeLoginModal(){
+        loginModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+    // Close Modal when closed button is clicked
+    function closeSignupModal() {
+  document.getElementById("signupModal").style.display = "none";
+}
+
+function closeLoginModal() {
+  document.getElementById("loginModal").style.display = "none";
+}
+
+
+    // Login function (just a placeholder)
+    function login() {
+      const emailOrUsername = document.getElementById('emailOrUsername').value;
+      const password = document.getElementById('password').value;
+
+      if (emailOrUsername && password) {
+        alert(`Logged in as ${emailOrUsername}`);
+        loginModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      } else {
+        alert('Please fill in both fields');
+      }
+    }
+
+    function logout() {
+      alert('Logging out...');
+    }
+  </script>
+
+ <script>
+    function openLoginModal() {
+  closeAllModals();
+  document.getElementById("loginModal").style.display = "flex";
+}
+
+function openForgotPasswordModal() {
+  closeAllModals();
+  document.getElementById("forgotPasswordModal").style.display = "flex";
+}
+
+function closeLoginModal() {
+  document.getElementById("loginModal").style.display = "none";
+}
+
+function closeForgotPasswordModal() {
+  document.getElementById("forgotPasswordModal").style.display = "none";
+}
+
+function closeAllModals() {
+  document.getElementById("loginModal").style.display = "none";
+  document.getElementById("forgotPasswordModal").style.display = "flex";
+  document.getElementById("authModal")?.style.display = "none"; // optional for Sign Up
+}
+
+function sendResetLink() {
+  const email = document.getElementById("resetEmail").value;
+  if (email) {
+    alert(`Password reset link sent to ${email}`);
+    closeForgotPasswordModal();
+  } else {
+    alert("Please enter your email.");
+  }
+}
+
+function backToLogin() {
+  closeForgotPasswordModal();
+  openLoginModal();
+  </script>
+}
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <h1>Empower Your Future Through Knowledge</h1>
+    <p>Connect. Grow. Succeed. A safe place to learn, share, and find support from experinced peers and skilled personels. </p>
+    <div class="btn-container">
+        <button class="btn btn-get-started" onclick="openModal()">Get Started</button>
+    </div> 
+    
+    <!-- Modal for Sign Up -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+             <h3>Create an Account</h3>
+          <!-- Signup Form -->
+          <form id="signupForm" class="form-section" style="display: block;">
+            <input type="text" placeholder="Username" required />
+            <input type="email" placeholder="Email" required />
+            <input type="password" placeholder="Create Password" requred />
+            <input type="date" placeholder="Date of Birth" required /> 
+            <button class="button">Sign Up</button>
+
+           <!-- Social Sign-In Options -->
+      <div class="social-btns">
+        <p style="text-align: center; margin: 5px 0; font-size: small;">or sign up with</p>
+        <button type="button" class="google-btn" onclick="googleSignIn()">Google</button>
+        <button type="button" class="facebook-btn" onclick="facebookSignIn()">Facebook</button>
+      </div> 
+          </form>
+      </div>
+    </div>
+</section>
+
+<!-- Highlight Section -->
+<section class="highlight">
+    <h2>Key Topics We Cover</h2>
+    <div class="topics-container">
+        <div class="topic-card">
+            <h3>Depression Support</h3>
+            <p>Share your struggles, find encouragement, and connect with others who understand. You're not alone — join our support community.</p>
+            <a href="forum.html" class="join-btn">Join the Conversation</a>
+        </div>
+        <div class="topic-card">
+            <h3>Relationship Issues</h3>
+            <p>Whether family, friendships, or dating, discuss challenges and learn how to build stronger, healthier relationships.</p>
+            <a href="forum.html" class="join-btn">Join the Conversation</a>
+        </div>
+        <div class="topic-card">
+            <h3>Skill Building & Self Development</h3>
+            <p>Grow your skills, confidence, and mindset through peer advice, resources, and personal development tips shared by our community.</p>
+            <a href="#blog" class="join-btn">Join the Conversation</a>
+        </div>
+        <div class="topic-card">
+            <h3>Job Opportunities</h3>
+            <p>Discover job openings, internships, and freelance gigs shared by the community to help you move forward in your career journey.</p>
+            <a href="job-posting.html" class="join-btn">Join the Conversation</a>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <h2>About Us</h2>
+
+    <!-- Mission Section -->
+    <div class="mission">
+        <h3>Our Mission</h3>
+        <p>
+            We empower individuals with skills, knowledge, and social awareness to create opportunities for growth. 
+            Our platform provides a safe space where people can share life challenges, receive helpful insights, and connect with others facing similar situations. 
+            We also promote job creation by helping users discover opportunities, build practical skills, and become self-reliant in a fast-changing world. 
+            Whether you're seeking guidance, support, or a path to employment, we're here to walk the journey with you.
+        </p>
+    </div>
+
+    <!-- Vision Section -->
+    <div class="vision">
+        <h3>Our Vision</h3>
+        <p>
+            To build a community where every individual is empowered to overcome challenges, unlock their full potential, and contribute to a society of mutual support and growth. 
+            We envision a world where skill development and job opportunities are accessible to all, fostering a sustainable future for all communities.
+        </p>
+    </div>
+</section>
+
+
+<section class="blog" id="blog">
+    <h2>Blog</h2>
+  
+    <!-- Learning Resources -->
+    <div class="resources">
+      <h3>Upskilling & Personal Development Resources</h3>
+      <ul>
+        <li><a href="https://www.freecodecamp.org/" target="_blank">FreeCodeCamp – Learn to Code</a></li>
+        <li><a href="https://www.coursera.org/learn/emotional-intelligence" target="_blank">Emotional Intelligence – Coursera</a></li>
+        <li><a href="https://www.khanacademy.org/" target="_blank">Khan Academy – Free Learning</a></li>
+        <li><a href="https://www.mindtools.com/" target="_blank">MindTools – Career & Life Skills</a></li>
+      </ul>
+    </div>
+  
+    <!-- Latest Blog Posts -->
+    <div class="blog-posts">
+      <h3>Latest Blog Posts</h3>
+      <ul id="blog-list">
+        <li>
+          <strong>How to Overcome Anxiety</strong>
+          <p>Tips for managing stress effectively.</p>
+          <small>Posted by Admin</small>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Blog Submission Form -->
+    <div class="blog-form">
+      <h3>Submit Your Blog Post</h3>
+      <input type="text" id="blog-title" placeholder="Enter Blog Title">
+      <textarea id="blog-content" placeholder="Write your content here..."></textarea>
+      <button onclick="submitBlog()">Submit Blog</button>
+    </div>
+  </section>
+  
+  <script>
+    function submitBlog() {
+      const title = document.getElementById('blog-title').value;
+      const content = document.getElementById('blog-content').value;
+  
+      if (!title || !content) {
+        alert("Please enter both title and content.");
+        return;
+      }
+  
+      const blogList = document.getElementById('blog-list');
+      const li = document.createElement('li');
+  
+      li.innerHTML = `
+        <strong>${title}</strong>
+        <p>${content}</p>
+        <small>Posted by You</small>
+      `;
+  
+      blogList.prepend(li);
+      document.getElementById('blog-title').value = '';
+      document.getElementById('blog-content').value = '';
+    }
+  </script>
+  
+
+<section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: info@upskilling.com</p>
+    <p>Phone: +254 703 620 639</p>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Upskilling & Awareness. All Rights Reserved.</p>
+</footer> 
+
+<script>
+    // Open the modal
+    function openModal() {
+        document.getElementById("authModal").style.display = "flex";
+        document.body.style.overflow = 'hidden';
+        document.getElementById("signupForm").style.display = "block";
+    }
+
+    // Close the modal
+    function closeModal() {
+        document.getElementById("authModal").style.display = "none";
+        document.body.style.overflow ='';
+    }
+
+    // Handle Google Sign-In (You will replace this with the actual Google login functionality)
+    function googleSignIn() {
+        alert("Google Sign-In clicked");
+        // You will add Google login SDK functionality here
+    }
+
+    // Handle Facebook Sign-In (You will replace this with the actual Facebook login functionality)
+    function facebookSignIn() {
+        alert("Facebook Sign-In clicked");
+        // You will add Facebook login SDK functionality here
+    }
+
+    // Modal close button functionality
+    document.querySelector(".close").addEventListener("click", closeModal);
+</script>
+
+<script>
+  function showForm(formType) {
+    if (formType === 'login') {
+        document.getElementById("loginForm").classList.add("show");
+        document.getElementById("signupForm").classList.remove("show");
+    } else {
+        document.getElementById("signupForm").classList.add("show");
+        document.getElementById("loginForm").classList.remove("show");
+     }
+   }
+  }
+
+</script>
+</body>
+</html>

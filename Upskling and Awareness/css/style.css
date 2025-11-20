@@ -1,0 +1,641 @@
+ /* Global Styles */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    overflow-x: hidden;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    text-align: left;
+    height: 100vh;
+    background:  url('../images/background3.jpg');
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    padding-top: 80px;
+}
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+.hero p {
+    font-size: 1.7em;
+    margin-bottom: 20px;
+}
+.btn-container {
+    display: flex;
+    gap: 15px;
+}
+.btn {
+    width: auto;
+    max-width: 200px;
+    padding: 10px 20px;
+    white-space: nowrap;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    animation: indicatorMove 1s infinite;
+    transition: background-color 0.3s ease;
+}
+/* Animation to create a bouncing effect */
+@keyframes indicatorMove{
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+}
+@media (max-width: 768px) {
+    .btn{
+      width: auto;        /* Keep it tight */
+      padding: 10px 20px; /* Maintain spacing */
+      font-size: 0.95rem;
+    }
+  }
+
+.btn:hover{
+    background: #facc15;
+    color: white;
+}
+.btn-signup {
+    background: #facc15;
+    color: #1e3a8a;
+}
+.btn-signup:hover, .btn-login:hover {
+    background: white;
+    color: #1e3a8a;
+}
+.btn-login {
+    background: #9333ea;
+    color: white;
+}
+
+
+/* Sections */
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+.highlight {
+    background: #1e3a8a;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: white;
+    margin-top: 0%;
+    min-width: auto;
+    position: relative;
+}
+.highlight h2 {
+    color: #fff;
+    font-size: 2.2em;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+.topic-card:hover{
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.highlight h3{
+    color: #1e3a8a;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.topics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.topic-card {
+    background: #facc15;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    margin: 0 auto;
+}
+.join-btn{
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    background-color: #1e3a8a;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    align-self: flex-start
+}
+.join-btn:hover{
+    background-color: #fff;
+    color: #333;
+}
+
+
+/*About section styling */
+.about, .blog, .contact {
+    background: #fff;
+    padding: 60px 20px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+.about h2, .forum h2, .blog h2, .contact h2 {
+    color: #1e3a8a;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.about p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.6;
+}
+/*mission & vision containers */
+.mission, .vision{
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 40px 20x;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+/*Mission and vision titles */
+.mission h3, .vision h3{
+    color: #1e3a8a;
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+/* Paragraphs styling */
+.mission p, .vision p{
+    font-size: 1.2em;
+    max-width: 900px;
+    margin: auto;
+    line-height: 1.6;
+    color: #555;
+}
+/* Responsive styling */
+@media(max-width: 768px){
+    .mission p, .vision p{
+        font-size: 1em;
+        padding: 0 10px;
+    }
+}
+
+/* Blog Section Styling */
+.blog {
+   background: #fff;
+   padding: 60px 20px;
+   text-align: center;
+}
+
+.blog h2 {
+   font-size: 2.2em;
+   color: #1e3a8a;
+   margin-bottom: 20px;
+}
+
+/* Resources */
+.resources {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .resources h3 {
+    margin-bottom: 10px;
+    color: #2b7a78;
+  }
+  
+  .resources ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .resources ul li {
+    margin-bottom: 10px;
+  }
+  
+  .resources ul li a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .resources ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Blog Posts */
+  .blog-posts {
+    margin-bottom: 40px;
+  }
+
+.blog-form {
+   background: white;
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+   max-width: 600px;
+   margin: auto;
+   text-align: left;
+}
+
+.blog-form h3 {
+color: #1e3a8a;
+margin-bottom: 15px;
+}
+
+.blog-form input,
+.blog-form textarea {
+width: 100%;
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+.blog-form button {
+background: #9333ea;
+color: white;
+padding: 10px 15px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+width: 100%;
+transition: 0.3s;
+}
+
+.blog-form button:hover {
+background: #1e3a8a;
+}
+
+.blog-posts {
+margin-top: 40px;
+}
+
+.blog-posts h3 {
+color: #1e3a8a;
+font-size: 1.8em;
+margin-bottom: 20px;
+}
+
+.blog-posts ul {
+list-style: none;
+padding: 0;
+max-width: 600px;
+margin: auto;
+}
+
+.blog-posts li {
+background: white;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+margin-bottom: 15px;
+text-align: left;
+}
+
+.blog-posts li strong {
+color: #9333ea;
+display: block;
+font-size: 1.2em;
+margin-top: 5px;
+}
+
+.blog-list p{
+    margin: 5px 0 10 px;
+    color: #999;
+}
+
+.resources{
+    padding: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .blog {
+      padding: 20px 10px;
+    }
+    .resources,
+    .blog-form,
+    .blog-post{
+        padding: 15px;
+    } 
+}
+
+/* Contact Section */
+.contact {
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1e3a8a;
+    color: white;
+    margin-top: 30px;
+    height: 10vh;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+
+  /* Ensure navbar adjusts properly on mobile */
+@media (max-width: 768px) {
+.navbar {
+flex-direction: column;
+text-align: center;
+padding: 10px;
+height: auto;
+}
+.nav-links {
+flex-direction: column;
+gap: 10px;
+}
+}
+
+/* Adjust hero section for small screens */
+@media (max-width: 768px) {
+.hero {
+height: auto;
+padding-top: 55%;
+}
+.hero h1 {
+font-size: 2em;
+}
+.hero p {
+font-size: 1.5em;
+}
+.btn-container {
+flex-direction: column;
+}
+.btn {
+max-width: 200px;
+width: auto;        /* Keep it tight */
+padding: 10px 20px; /* Maintain spacing */
+font-size: 0.95rem;
+}
+}
+
+/* Make the blog form and posts fit properly on mobile */
+@media (max-width: 600px) {
+.blog-form {
+width: 90%;
+padding: 15px;
+}
+.blog-form input, 
+.blog-form textarea {
+font-size: 1em;
+}
+.blog-posts ul {
+width: 90%;
+}
+}
+
+/* Ensure topics display properly */
+@media (max-width: 600px) {
+.topics-container {
+grid-template-columns: 1fr;
+gap: 15px;
+}
+}
+
+/* Adjust forum input for small screens */
+@media (max-width: 600px) {
+.forum input {
+width: 90%;
+}
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+  }
+  
+  .modal-content {
+    background: white;
+    margin:auto;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px; 
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .close:hover{
+    color: black;
+  }
+
+  /* Form-Section Styling */
+  
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .form-section input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  
+  .form-section .btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /* Login From Specific styling */
+  #loginForm{
+    display: none;
+    border: #ccc;
+    border-radius: 8px;
+  }
+
+  #loginForm input[type="text"],
+  #loginForm input[type="password"]{
+    font-size: 16px;
+  }
+
+  #loginForm button{
+    font-size: 18px
+  }
+
+  /* Signup Form Specific Styling */
+  #signupForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+    width: auto;
+  }
+
+  #signupForm input{
+    font-size: 12px;
+  }
+
+  #signupForm button{
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  /* forgot password styling */
+  .forgot-password{
+    text-align: center;
+    font-size: 0.8rem;
+    color: #facc15;
+    text-decoration:none;
+    margin-top: -8px;
+    margin-bottom: 10px;
+  }
+
+  .forgot-password:hover{
+    text-decoration: underline;
+  }
+
+  /* Forgot password form styling */
+  .modal{
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+/* Social Media Buttons */
+.social-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    justify-content: space-between;
+}
+
+.social-btn {
+    padding: 10px;
+    width: 48%;
+    font-size: 12px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.google-btn, .facebook-btn{
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.google-btn {
+    background-color: #facc15;
+}
+
+.facebook-btn {
+    background-color: #3B5998;
+}
+
+.social-btn:hover {
+    opacity: 0.9;
+}
+
+  /* Display Styles for Modals */
+#authModal.show {
+    display: flex; /* Make sure the modal is visible */
+}
+
+/* Prevent the login form from showing in the signup modal */
+#signupForm {
+    display: block; /* By default, show the signup form */
+}
+
+#loginForm {
+    display: none;
+}
+
+/* Display the login form when 'Login' tab is clicked */
+#loginForm.show {
+    display: block;
+}
+
+#signupForm.show {
+    display: block;
+}
+
+/* Remove default margin on body to prevent scrolling issues */
+body {
+    margin: 0;
+    padding: 0;
+}

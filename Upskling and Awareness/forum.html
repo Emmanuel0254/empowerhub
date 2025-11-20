@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forum Page</title>
+  <link rel="icon" href="images/logo-favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+body {
+  background-color: whitesmoke;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+main{
+  flex: 1;
+}
+h1{
+  margin-top: 10%;
+}
+
+/* Forum Container */
+.forum-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+  align-items: right;
+}
+
+/* Header Section */
+.forum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+h1{
+  color: #1e3a8a;
+}
+
+.add-post-btn {
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.add-post-btn:hover {
+  background-color: #145dbf;
+}
+
+/* Posts */
+.post {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #65676b;
+}
+
+.username {
+  font-weight: bold;
+  color: #1c1e21;
+}
+
+.post-body {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #65676b;
+}
+
+.reply-btn {
+  background: none;
+  border: none;
+  color: #1877f2;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  margin: auto;
+}
+
+/* Replies Section */
+.replies {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #e4e6eb;
+  text-align: left;
+}
+
+.reply {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.reply-input {
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.post-reply-btn {
+  margin-top: 0.4rem;
+  background-color: #42b72a;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.forum-page .post-reply-btn:hover {
+  background-color: #36a420;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.forum-page .submit-post-btn {
+  background-color: #facc15; /* blue */
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+.forum-page .submit-post-btn:hover {
+  background-color: #facc15;
+}
+
+.forum-page .cancel-post-btn {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  </style>
+
+<body>
+     <!-- Navbar -->
+  <header class="navbar">
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+
+    <div class="logo">
+      <span style="color: #facc15;">Empower</span>
+      <span style="color: #1e3a8a;">Hub</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#blog">Blog</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">Services</button>
+        <div class="dropdown-content">
+          <a href="forum.html">Forum</a>
+          <a href="job-posting.html">Job Posting</a>
+          <a href="profile.html">Profile</a>
+          <a href="javascript:void(0)" onclick="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-buttons"></div>
+    <div class="auth-buttons"></div>
+  </header>
+
+  <script>
+    // Navbar and Burger Menu Toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const burger = document.querySelector('.burger');
+      const nav = document.querySelector('.nav-links');
+      const navLinks = document.querySelectorAll('.nav-links a, .nav-links .dropdown');
+
+      burger.addEventListener('click', () => {
+        nav.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+
+        navLinks.forEach((link, index) => {
+          link.style.animation = link.style.animation ? '' :
+            `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+        });
+      });
+
+      const servicesBtn = document.querySelector('.dropbtn');
+      const dropdown = document.querySelector('.dropdown-content');
+
+      servicesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+
+      window.addEventListener('click', function (event) {
+        if (!event.target.matches('.dropbtn')) {
+          dropdown.classList.remove('show');
+        }
+      });
+    });
+
+    function logout() {
+      alert('Logging out...');
+    }
+  </script>
+
+   <main>
+      <!-- Forum Section -->
+        <div class="forum-page">
+       <section class="forum-container">
+       <div class="forum-header">
+       <h1>Forum Discussions</h1>
+       </div>
+
+
+     <!-- Dynamic posts will be rendered inside this -->
+      <div class="post-list"></div>
+       <button id="addPostBtn" class="add-post-btn">+ Add Post</button>
+       </section>
+       </div>
+    </main>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Upskilling & Awareness. All Rights Reserved.</p>
+</footer> 
+
+<script>
+     fetch('navbar.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('navbar-container').innerHTML = data);
+
+
+      // Get elements
+const addPostButton = document.querySelector('.add-post-btn');
+const forumContainer = document.querySelector('.forum-container');
+const addPostForm = document.createElement('div');
+addPostForm.classList.add('add-post-form');
+
+  // Posts data
+  const posts = [
+    {
+      username: "Emmanuel Omondi",
+      content: "Having trouble finding a job, any tips?",
+      replies: [
+        { username: "Jane Doe", reply: "Try Upwork or Fiverr." },
+        { username: "Alex", reply: "Consider LinkedIn networking." }
+      ]
+    }
+  ];
+
+ // Create the form structure
+addPostForm.innerHTML = `
+  <h3>Add a Post</h3>
+  <textarea placeholder="Write your post..." rows="4" style="width: 100%; word-wrap: break-word; white-space: pre-wrap; overflow-wrap: break-word;"></textarea>
+  <button class="submit-post-btn">Post</button>
+  <button class="cancel-post-btn">Cancel</button>
+`;
+
+// Show the form when clicking the "Add Post" button
+addPostButton.addEventListener('click', () => {
+  forumContainer.appendChild(addPostForm);
+  addPostButton.style.display = 'none'; // Hide the Add Post button when the form is shown
+});
+
+// Cancel button to close the form
+addPostForm.querySelector('.cancel-post-btn').addEventListener('click', () => {
+  addPostForm.style.display = 'none';
+  addPostButton.style.display = 'block'; // Show the Add Post button again
+});
+// Function to add a new post
+addPostForm.querySelector('.submit-post-btn').addEventListener('click', () => {
+  const textarea = addPostForm.querySelector('textarea');
+  if (textarea.value.trim()) {
+    const newPost = {
+      username: 'New User',
+      content: textarea.value,
+      replies: [],
+    };
+    posts.push(newPost); // Add post to posts array
+    textarea.value = ''; // Clear textarea
+    addPostForm.style.display = 'none'; // Hide the form
+    addPostButton.style.display = 'block'; // Show the Add Post button again
+    renderPosts(); // Re-render posts with the new one added
+  }
+});
+  // Get reference to the post list container
+  const postList = document.querySelector('.post-list');
+
+  function renderPosts() {
+    postList.innerHTML = ''; // Clear current posts
+
+    posts.forEach((post, index) => {
+      const postElement = document.createElement('div');
+      postElement.classList.add('post');
+
+      postElement.innerHTML = `
+        <div class="post-header">
+          <span class="username">${post.username}</span>
+          <span>${new Date().toLocaleDateString()}</span>
+        </div>
+        <div class="post-body">${post.content}</div>
+        <div class="post-footer">
+          <span>💬 ${post.replies.length} Replies</span>
+          <button class="reply-btn">Reply</button>
+        </div>
+        <div class="replies" id="replies-${index}" style="display: none;">
+          ${post.replies.map(reply => `
+            <div class="reply">
+              <strong>${reply.username}:</strong> ${reply.reply}
+            </div>
+          `).join('')}
+          <input type="text" class="reply-input" placeholder="Write your reply..." />
+          <button class="post-reply-btn">Post Reply</button>
+        </div>
+      `;
+
+      // Attach event listeners
+      const replyBtn = postElement.querySelector('.reply-btn');
+      const replySection = postElement.querySelector(`#replies-${index}`);
+      const replyInput = postElement.querySelector('.reply-input');
+      const postReplyBtn = postElement.querySelector('.post-reply-btn');
+
+      replyBtn.addEventListener('click', () => {
+        replySection.style.display = replySection.style.display === 'none' ? 'block' : 'none';
+      });
+
+      postReplyBtn.addEventListener('click', () => {
+        const replyText = replyInput.value.trim();
+        if (replyText !== '') {
+          posts[index].replies.push({ username: 'You', reply: replyText });
+          renderPosts(); // Re-render to show the new reply
+        }
+      });
+
+      postList.appendChild(postElement);
+    });
+  }
+
+  // Initial render
+  renderPosts();
+</script>
+</body>
+</html>
